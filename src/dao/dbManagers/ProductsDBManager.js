@@ -2,10 +2,11 @@ import productsModel from '../../models/productos.js'
 
 export default class ProductsDBManager {
     constructor(){
-        console.log('Trabajando con MongoDB')
+        console.log('Conectado a MongoDB')
     }
 
     getProducts = async (pageq, limitq, filterByq, sortByq, sortOrderq) =>{
+        console.log('Primer console log')
         console.log(pageq, limitq, filterByq, sortByq, sortOrderq)
         let productos = await productsModel.paginate({filterByq},{page:pageq,limit:limitq,lean:true,sort:([[sortByq,sortOrderq]])})
         return productos

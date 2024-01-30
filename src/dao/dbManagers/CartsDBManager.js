@@ -11,14 +11,26 @@ export default class CartsDBManager {
         return upload
     }
 
-    getCarts = async()=>{
-        let carritos = await cartsModel.find().lean().populate({path:'products.product',model:productsModel});
-        return carritos
-    }
+    getCarts = async (req, res) => {
+        try {
+            let carritos = await cartsModel.find({}, { __v: 0 }).lean().populate({ path: 'products.product' });
+            // res.json({ status: 'Success', payload: carritos })
+            return carritos
+        } catch (error) {
+            console.log(error)
+        }
 
+    }
     getCartById = async(getCode)=>{
-        let carritos = await cartsModel.findOne({_id:getCode}).populate({path:'products.id',model:productsModel});
-        return carritos
+        try {
+            let carrito = await cartsModel.findOne({ _id: getCode }).lean().populate({ path: 'products.id', model: productsModel });
+            // console.log(carrito)
+            return carrito
+        } catch (error) {
+            console.log(error)
+        }
+
+
     }
 
     deleteProductById  = async(cartId,prodId)=>{

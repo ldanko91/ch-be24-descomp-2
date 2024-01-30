@@ -14,7 +14,7 @@ dbProdsRouter.get('/', async(req,res)=>{
     const {docs,page,hasPrevPage,hasNextPage,prevPage,nextPage} = await DBProdsManager.getProducts(pageq, limitq, filterByq, sortByq, sortOrderq);
     console.log(docs,page,hasPrevPage,hasNextPage,prevPage,nextPage)
     const productos = docs
-    res.render('home',{
+    res.render('products', {
         productos,page,hasPrevPage,hasNextPage,prevPage,nextPage,
         title: "Listado de productos"
     })
@@ -24,7 +24,7 @@ dbProdsRouter.get('/:pcod', async(req,res)=>{
     let {pcod} = req.params
     let productos = await DBProdsManager.getProductByCode(pcod);
     console.log(productos);
-    res.render('home',{
+    res.render('productDetail', {
         productos,
         title: `${productos[0].title} código ${pcod}`
     })

@@ -1,26 +1,27 @@
 import mongoose from "mongoose";
 
-const cartsCollection = 'carts'
+const cartsCollection = 'cart'
 
-const cartsSchema = mongoose.Schema({
+const cartsSchema = new mongoose.Schema({
     
     products:{
-        type: [{
-            product:{
-                type:mongoose.Schema.Types.ObjectId,
-                ref:'products'
+        type: [
+            {
+                product: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'product'
             },
-            id:{
+                id: {
                 type: String,
-                required: true
+                    required: true,
             },
-            quantity:{
-                type:Number,
+                quantity: {
+                    type: Number,
                 required: true,
                 default: 1
-            }
-        },
-        
+
+                },
+            },
         ],
         default:[],
         required: true

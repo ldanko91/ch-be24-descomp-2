@@ -6,12 +6,12 @@ const DBCartsManager = new CartsDBManager();
 
 dbCartsRouter.get('/', async(req,res)=>{
     let download = await DBCartsManager.getCarts();
-    console.log(download);
     let carritos = download;
-    let products = download.products;
-    console.log(products);
+    console.log(carritos);
+    // let productos = carritos.product.products;
+    // console.log(productos);
     res.render('carts',{
-        carritos,products,
+        carritos,
         title: `Listado de carritos`
     }) 
 })
@@ -19,11 +19,10 @@ dbCartsRouter.get('/', async(req,res)=>{
 dbCartsRouter.get('/:ccod', async(req,res)=>{
     let {ccod} = req.params
     let download = await DBCartsManager.getCartById(ccod);
-    let carritos = download;
     let products = download.products;
     console.log(products);
-    res.render('carts',{
-        carritos,products,
+    res.render('cartDetail', {
+        ccod, products,
         title: `Productos en carrito código: ${ccod}`
     }) 
 })
